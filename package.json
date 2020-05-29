@@ -1,0 +1,21 @@
+{
+  "name": "voting_dapp",
+  "version": "1.0.0",
+  "description": "Coding Bootcamps - Voting_DApp",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "truffle-contract": "^4.0.31"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
