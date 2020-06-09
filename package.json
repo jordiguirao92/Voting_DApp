@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "truffle-contract": "^4.0.31"
+    "truffle-contract": "^4.0.31",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.2.8"
   },
   "devDependencies": {
     "lite-server": "^2.5.4"

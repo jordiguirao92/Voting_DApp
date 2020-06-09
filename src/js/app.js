@@ -1,18 +1,19 @@
 // Import the page's CSS. Webpack will know what to do with it.
-import "../stylesheets/app.css";
-import { default as Web3} from 'web3';
-import { default as contract } from 'truffle-contract'
-import voting_artifacts from '../../build/contracts/Voting.json'
+//import "../css/index.css";
+//import { default as Web3} from 'web3';
+//Web3 = require('web3');
+//import { default as contract } from 'truffle-contract'
+//var contract = require("truffle-contract");
+//import voting_artifacts from '../../build/contracts/Voting.json'
 
 let web3;
 let web3Provider;
-let Voting = contract(voting_artifacts);
-console.log("Truffle contract ok");
+let Voting;
 let candidates = {}
 let tokenPrice = null;
 
 
-$( document ).ready(function() {
+async function init() {
     if (window.ethereum) {
         web3Provider = window.ethereum;
         try {
@@ -35,10 +36,17 @@ $( document ).ready(function() {
       
       web3 = new Web3(web3Provider);
       console.log(web3Provider);
+      
+      const data = await $.getJSON('Voting.json');
+      console.log(data);
+      var voting_artifacts = data;
+      Voting = TruffleContract(voting_artifacts);
+      console.log("data ok");
+      console.log("Truffle contract ok");
       Voting.setProvider(web3Provider);
     
       return populateCandidates();
-});
+}
 
 
 async function populateCandidates() {
@@ -76,21 +84,20 @@ function setupCandidateRows() {
 async function populateTokenData() {
     let voting = await Voting.deployed();
 
-    let totalTokens = await voting.totalTokens();
+    let totalTokens = await voting.totalTokens.call();
     $("#tokens-total").html(totalTokens.toString());
 
-    let totalSold = await voting.tokensSold.call();
+    let totalSold = await voting.tokensSold();
     $("#tokens-sold").html(totalSold.toString());
 
-    let price = voting.tokenPrice();
+    let price = await voting.tokenPrice.call();
     tokenPrice = parseFloat(web3.fromWei(price.toString()));
     $("#token-cost").html(tokenPrice + " Ether");
 
-    let balance = await web3.eth.getBalance(voting.address);
-    $("#contract-balance").html(web3.fromWei(balance.toString()) + " Ether");
+    web3.eth.getBalance(voting.address, function(error, result) {
+      $("#contract-balance").html(web3.fromWei(result.toString()) + " Ether");
+    });
 }
-
-
 
 
 
@@ -121,8 +128,6 @@ window.buyTokens = async function() {
   await voting.buy({value: web3.toWei(price, 'ether'), from: web3.eth.accounts[0]});
   $("#buy-msg").html("");
 
-  let balance = await web3.eth.getBalance(voting.address);
-  $("#contract-balance").html(web3.fromWei(balance.toString()) + " Ether");
 
   populateTokenData();
 }
@@ -144,29 +149,3 @@ window.lookupVoterInfo = async function() {
     $("#votes-cast").append(allCandidates[i] + ": " + votesPerCandidate[i] + "<br>");
   }
 }
-
-
-
-
-
-
-
-
-
-/*
-$( document ).ready(function() {
-  if (typeof web3 !== 'undefined') {
-    console.warn("Using web3 detected from external source like Metamask")
-    // Use Mist/MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
-  } else {
-    console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
-
-  Voting.setProvider(web3.currentProvider);
-  populateCandidates();
-
-});
-*/

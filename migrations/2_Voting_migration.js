@@ -1,5 +1,14 @@
+Web3 = require('web3');
 
 let Voting = artifacts.require("./Voting.sol");
 module.exports = function(deployer) {
-  deployer.deploy(Voting, 1000, web3.toWei('0.1', 'ether'), ['Juan', 'Maria', 'Pablo']);
+  deployer.deploy(Voting, 1000, Web3.utils.toWei('0.1', 'ether'), [Web3.utils.asciiToHex('Juan'), Web3.utils.asciiToHex('Maria'), Web3.utils.asciiToHex('Pablo')]);
 };
+
+//Juan: 0x4a75616e00000000000000000000000000000000000000000000000000000000
+//Maria: 0x4d61726961000000000000000000000000000000000000000000000000000000
+//Pablo: 0x5061626c6f000000000000000000000000000000000000000000000000000000
+/*
+["0x4a75616e00000000000000000000000000000000000000000000000000000000","0x4d61726961000000000000000000000000000000000000000000000000000000","0x5061626c6f000000000000000000000000000000000000000000000000000000"]
+https://blockchangers.github.io/solidity-converter-online/
+*/

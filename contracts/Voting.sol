@@ -124,4 +124,10 @@ address payable internal voting_owner;
             return voting_owner;
         }
 
+
+   //Consultar balance smart contract
+  function check_balance() public view returns(uint){
+            return address(this).balance;
+        }
+
 }

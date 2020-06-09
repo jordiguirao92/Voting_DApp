@@ -8,14 +8,15 @@ contract ('Voting', function(accounts){
    
     const votingInfo = {
         totalTokens: 1000,
-        tokenPrice: web3.toWei('0.01', 'ether'),
-        candidateList: ['Juan', 'Maria', 'Pablo'],
-        voting_owner: 0x345503ce4B472cE35186AA87A9C6e600C94Bcf71,
+        tokenPrice: Web3.utils.toWei('0.1', 'ether'),
+        candidateList: [Web3.utils.asciiToHex('Juan'), Web3.utils.asciiToHex('Maria'), Web3.utils.asciiToHex('Pablo')],
+        voting_owner: 0x59b5929ac70aDb06396Cdb128F990cd2D9A1519b,
     }
+    
 
 
     beforeEach(async () => {
-        votingInstance = await Voting.new(1000, web3.toWei('0.1', 'ether'), ['Juan', 'Maria', 'Pablo']);
+        votingInstance = await Voting.new(1000, Web3.utils.toWei('0.01', 'ether'), [Web3.utils.asciiToHex('Juan'), Web3.utils.asciiToHex('Maria'),  Web3.utils.asciiToHex('Pablo')]);
     });
 
 
@@ -31,9 +32,9 @@ contract ('Voting', function(accounts){
         const tokens = await votingInstance.totalTokens.call();
         const balance = await votingInstance.balanceTokens.call();
 
-        assert.equal(candidates[0],votingInfo.candidateList[0], "El candidato Juan no coincide");
-        assert.equal(candidates[1],votingInfo.candidateList[1], "El candidato Maria no coincide");
-        assert.equal(candidates[2],votingInfo.candidateList[2], "El candidato Pablo no coincide");
+        assert.equal(candidates[0], votingInfo.candidateList[0].padEnd(66, 0), "El candidato Juan no coincide");
+        assert.equal(candidates[1], votingInfo.candidateList[1].padEnd(66, 0), "El candidato Maria no coincide");
+        assert.equal(candidates[2], votingInfo.candidateList[2].padEnd(66, 0), "El candidato Pablo no coincide");
         assert.equal(tokens,votingInfo.totalTokens, "El número total de tokens no es coincide");
         assert.equal(balance,votingInfo.totalTokens, "El balance de tokens no coincide");
 
@@ -41,24 +42,24 @@ contract ('Voting', function(accounts){
 
 
     it("Comprando tokens", async() => {
-        await votingInstance.buy({ from: accounts[1], value: web3.toWei('1', 'ether') });
-        const voterAddress = await votingInstance.voterInfo[accounts[1]].voterAddress.call();
-        const boughtTokens = await votingInstance.voterInfo[accounts[1]].tokensBought.call();
+        await votingInstance.buy({ from: accounts[1], value: Web3.utils.toWei('2', 'ether') });
+        const voterInformation = await votingInstance.voterInfo.call(accounts[1])
         const balance = await votingInstance.balanceTokens.call();
         
-        assert.equal(voterAddress, accounts[1], "La dirección no coincide");
-        assert.equal(100, boughtTokens, "Los tokens comprados no coinciden");
-        assert.equal(900, balance, "Los tokens comprados no coinciden");
+        assert.equal(voterInformation[0], accounts[1], "La dirección no coincide");
+        assert.equal(200, voterInformation[1], "Los tokens comprados no coinciden");
+        assert.equal(800, balance, "Los tokens comprados no coinciden");
     })
     
 
     it("Votando a un candidato", async() => {
-        await votingInstance.voteForCandidate('Juan', 15, { from: accounts[1] });
-        const voteTokensCandidate = await votingInstance.totalVotesFor('Juan', {from: accounts[1]});
-        const tokensUsedCandidate = await votingInstance.voterInfo[accounts[1]].tokensUsedPerCandidate[0];
+        await votingInstance.buy({ from: accounts[1], value: Web3.utils.toWei('2', 'ether') });
+        await votingInstance.voteForCandidate(Web3.utils.asciiToHex('Juan'), 15, { from: accounts[1] });
+        const voteTokensCandidate = await votingInstance.totalVotesFor(Web3.utils.asciiToHex('Juan'), {from: accounts[1]});
+        const tokensUsedCandidate = await votingInstance.voterDetails(accounts[1]);
         
         assert.equal(voteTokensCandidate, 15, "Número de votos correctos");
-        assert.equal(tokensUsedCandidate, 15, "Número de votos correctos");
+        assert.equal(tokensUsedCandidate[1][0], 15, "Número de votos correctos");
     })
 
 

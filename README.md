@@ -1,6 +1,6 @@
-# Sobre el curso de Ethereum
+# Sobre el curso de Solidity
 Esta práctica es para el curso de Programación con Solidity de Coding Bootcamps: http://coding-bootcamps.com/es/ 
-Para más información sobre este curso, visite el siguiente enlace: https://learn.coding-bootcamps.com/p/introduccion-a-ethereum-blockchain-en-espanol
+Para más información sobre este curso, visite el siguiente enlace: https://learn.coding-bootcamps.com/p/programacion-de-solidity-en-espanol 
 
 Para más información sobre cursos de Blockchain en Español, visite el siguiente enlace: https://learn.coding-bootcamps.com/p/coding-bootcamps-espanol 
 
@@ -20,7 +20,7 @@ Los usuarios podrán comprar tokens con ether y usarlos para votar a su candidat
 5. Desplegando el Smart Contract en una testnet de Ethereum. 
 
 
-## Descripción Auction DApp
+## Descripción Voting DApp
 
 La organización (propietaria del smart contract) desplegará un smart contract con todos los candidatos disponibles.
 Los usuarios/votantes podrán comprar tokens usando ether. Podrán usar estos tokens para votar a su candidatos seleccionado.
@@ -57,7 +57,7 @@ La información de la votación se puede consultar en cualquier momento por cual
 
 ## Creación del Smart Contract
 
-1. Accedemos a la carpeta contracts y creamos el archivo Auction.sol. El código del Smart Contract se puede encontrar en: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/contracts/Auction.sol 
+1. Accedemos a la carpeta contracts y creamos el archivo Voting.sol. El código del Smart Contract se puede encontrar en: https://github.com/jordiguirao92/Voting_DApp/blob/master/contracts/Voting.sol
 2. Compilamos el smart contract. En la carpeta de nuestro proyecto ejecutamos el comando: `truffle compile`. Se nos creará la carpeta build.
 
 
@@ -72,8 +72,8 @@ La información de la votación se puede consultar en cualquier momento por cual
 
 ## Desplegando el Smart Contract con Truffle 
 
-1. En la carpeta migrations, creamos el archivo: 2_Voting_migration.js. El código se encuentra en: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/migrations/2_CarAuction_migrations.js 
-2. Modificamos el archivo truffle-config.js. Donde configuraremos nuestra red local de Ethereum para el despliegue del contrato. El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/truffle-config.js 
+1. En la carpeta migrations, creamos el archivo: 2_Voting_migration.js. El código se encuentra en: https://github.com/jordiguirao92/Voting_DApp/blob/master/migrations/2_Voting_migration.js
+2. Modificamos el archivo truffle-config.js. Donde configuraremos nuestra red local de Ethereum para el despliegue del contrato. El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/truffle-config.js 
 3. Iniciamos Ganache y comprobamos que los datos RPC SERVER sean los mismos que están en nuestro archivo truffle-config.js.
 4. En la carpeta raiz de nuestro proyecto ejecutamos el comando: `truffle migrate --network development`, se iniciará el despligue de nuestro smart contract. 
 
@@ -117,10 +117,10 @@ La información de la votación se puede consultar en cualquier momento por cual
 
 
 
-## Testing Car Auction DApp con Truffle
+## Testing Voting DApp con Truffle
 
 En la carpeta test, cremos el archivo CarAuction_test.js, donde escribiremos los diferentes test de nuestra DApp.
-El código de los test está en: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/test/CarAuction_test.js 
+El código de los test está en: https://github.com/jordiguirao92/Voting_DApp/blob/master/test/Voting_test.js
 
 Para comprobar nuestros test, ejecutamos: `truffle test`
 Podremos ver en la terminal el resultado de nuestros test. 
@@ -134,14 +134,14 @@ Creamos la carpeta src dentro de la carpeta de nuestro proyecto. Dentro de la ca
 #### index.html  
 
 En este archivo crearemos la interfaz gráfica y visual de nuestra DApp. 
-El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/index.html 
+El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/index.html 
 
 
 #### js
 
 Contiene los archivos: 
 
-- app.js: En este archivo crearemos el código necesario para poder conectar con nuestro smart contract. El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/js/app.js 
+- app.js: En este archivo crearemos el código necesario para poder conectar con nuestro smart contract. El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/js/app.js 
 - truffle-contract.js:El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/js/truffle-contract.js
 - web3.min-js: El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/js/web3.min.js 
 
