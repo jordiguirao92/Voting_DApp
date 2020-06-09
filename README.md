@@ -84,36 +84,36 @@ La información de la votación se puede consultar en cualquier momento por cual
 
 ### Dirección del contrato:
 
-`auction = await MyAuction.deployed()`
+`voter = await Voting.deployed()`
 
-`auction.address`
+`voter.address`
 
 ### Consultando propietario del contrato:
 
-`ownerAddress = await auction.get_owner()`
+`ownerAddress = await voter.get_owner()`
 
 `ownerAddress`
 
-### Consultando cuando acaba la subasta:
+### Consultando el total de tokens:
 
-`auctionEnd = await auction.auction_end.call()`
+`voterTotalTokens = await voter.totalTokens.call()`
 
-`auctionEnd`
+`voterTotalTokens`
 
-`auctionEnd.toString()`
+`voterTotalTokens.toString()`
 
-### Realizando una apuesta:
+### Comprando tokens:
 
-`auctionBid = await auction.bid({value:3000000000000000000})`
+`tokensBuy = await voter.buy({value:2000000000000000000})`
 
-`auctionBid`
+`tokensBuy`
 
-### Consultando la apuesta más alta:
-`highestBid = await auction.highestBid.call()`
+### Consultando el balance de tokens:
+`tokensBalance = await voter.balanceTokens.call()`
 
-`highetsBid`
+`tokensBalance`
 
-`highetsBid.toString()`
+`tokensBalance.toString()`
 
 
 

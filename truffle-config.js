@@ -18,7 +18,7 @@
  *
  */
 
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const HDWalletProvider = require("truffle-hdwallet-provider");
 const infuraKey = "dc3258335cc74b47a505b547797c2159";
 const mnemonic = "there joy culture agree dumb embark elite scale scatter three sausage wonder";
 //
