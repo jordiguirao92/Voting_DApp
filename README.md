@@ -119,7 +119,7 @@ La información de la votación se puede consultar en cualquier momento por cual
 
 ## Testing Voting DApp con Truffle
 
-En la carpeta test, cremos el archivo CarAuction_test.js, donde escribiremos los diferentes test de nuestra DApp.
+En la carpeta test, cremos el archivo Voting_test.js, donde escribiremos los diferentes test de nuestra DApp.
 El código de los test está en: https://github.com/jordiguirao92/Voting_DApp/blob/master/test/Voting_test.js
 
 Para comprobar nuestros test, ejecutamos: `truffle test`
