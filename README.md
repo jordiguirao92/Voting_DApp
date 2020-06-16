@@ -142,8 +142,8 @@ El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/i
 Contiene los archivos: 
 
 - app.js: En este archivo crearemos el código necesario para poder conectar con nuestro smart contract. El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/js/app.js 
-- truffle-contract.js:El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/js/truffle-contract.js
-- web3.min-js: El código está: https://github.com/jordiguirao92/CarAuction_DApp/blob/master/src/js/web3.min.js 
+- truffle-contract.js:El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/js/truffle-contract.js 
+- web3.min-js: El código está: https://github.com/jordiguirao92/Voting_DApp/blob/master/src/js/web3.min.js 
 
 
 
